@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using Dapper;
 using Keepr.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Repositories
 {
@@ -50,6 +51,24 @@ namespace Keepr.Repositories
         return vkkvm;
       }, new { id }).ToList();
       return keeps;
+    }
+
+    internal VaultKeep GetById(int id)
+    {
+      string sql = @"
+        SELECT * FROM vaultKeeps vk
+        WHERE vk.id = @id
+        ";
+      return _db.QueryFirstOrDefault<VaultKeep>(sql, new { id });
+    }
+
+    internal ActionResult<string> DeleteVaultKeep(int id)
+    {
+      string sql = @"
+        DELETE FROM vaultKeeps WHERE id = @id LIMIT 1;
+        ";
+      _db.Execute(sql, new { id });
+      return "delorted";
     }
   }
 }

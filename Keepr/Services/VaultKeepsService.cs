@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Services
 {
@@ -39,6 +40,16 @@ namespace Keepr.Services
       }
       List<VaultKeepKeepViewModel> keeps = _repo.GetKeepsByVault(id);
       return keeps;
+    }
+
+    internal ActionResult<string> DeleteVaultKeep(int id, Account userInfo)
+    {
+      VaultKeep target = _repo.GetById(id);
+      if (target.CreatorId != userInfo.Id)
+      {
+        throw new Exception("Not yours");
+      }
+      return _repo.DeleteVaultKeep(id);
     }
   }
 }
