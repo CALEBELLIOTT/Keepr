@@ -50,6 +50,12 @@ namespace Keepr.Services
       return _repo.Edit(id, updated);
     }
 
+    internal List<Keep> GetProfileKeeps(string id)
+    {
+      List<Keep> keeps = _repo.GetProfileKeeps(id);
+      return keeps;
+    }
+
     internal ActionResult<string> DeleteKeep(int id, Account userInfo)
     {
       Keep target = this.Get(id);

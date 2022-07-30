@@ -72,6 +72,8 @@ namespace Keepr.Repositories
       return keep;
     }
 
+
+
     internal Keep Edit(int id, Keep updated)
     {
       string sql = @"
@@ -95,6 +97,14 @@ namespace Keepr.Repositories
         ";
       _db.Execute(sql, new { id });
       return "delorted";
+    }
+
+    internal List<Keep> GetProfileKeeps(string id)
+    {
+      string sql = @"
+      SELECT * FROM keeps WHERE creatorId = @id;
+      ";
+      return _db.Query<Keep>(sql, new { id }).ToList();
     }
 
   }

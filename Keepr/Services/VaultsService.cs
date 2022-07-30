@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Services
 {
@@ -48,6 +50,25 @@ namespace Keepr.Services
         throw new Exception("Not your Vault to delete");
       }
       return _repo.DeleteVault(id);
+    }
+
+    internal ActionResult<List<Vault>> GetProfileVaults(string id, Account userInfo)
+    {
+      List<Vault> vaults = _repo.GetProfileVaults(id);
+      if (userInfo.Id == id)
+      {
+        return vaults;
+      }
+      int index = 0;
+      vaults.ForEach(v =>
+      {
+        if (v.IsPrivate)
+        {
+          vaults.RemoveAt(index);
+          index++;
+        }
+      });
+      return vaults;
     }
   }
 }

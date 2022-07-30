@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Dapper;
@@ -61,6 +62,14 @@ namespace Keepr.Repositories
         ";
       _db.Execute(sql, vaultData);
       return this.Get(id);
+    }
+
+    internal List<Vault> GetProfileVaults(string id)
+    {
+      string sql = @"
+      SELECT * FROM vaults WHERE creatorId = @id
+      ";
+      return _db.Query<Vault>(sql, new { id }).ToList();
     }
 
     internal string DeleteVault(int id)
