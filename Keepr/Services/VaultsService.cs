@@ -23,7 +23,8 @@ namespace Keepr.Services
       return vault;
     }
 
-    internal Vault Get(int id, Account userInfo)
+    internal Vault
+    Get(int id, Account userInfo)
     {
       Vault targetVault = _repo.Get(id);
       if (targetVault.IsPrivate == true && targetVault.CreatorId != userInfo.Id)

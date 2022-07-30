@@ -36,12 +36,16 @@ CREATE TABLE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
-    IF NOT EXISTS vaultKeep(
+    IF NOT EXISTS vaultKeeps(
         id INT NOT NULL primary key AUTO_INCREMENT COMMENT 'primary key',
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         keepId Int NOT NULL COMMENT 'Id of associated Keep',
         vaultId INT NOT NULL COMMENT 'Id of assciated Vault',
+        creatorId VARCHAR(225) NOT NULL COMMENT 'Id of assciated creator',
         FOREIGN KEY(vaultId) REFERENCES vaults(id),
-        FOREIGN KEY(keepId) REFERENCES keeps(id)
+        FOREIGN KEY(keepId) REFERENCES keeps(id),
+        FOREIGN KEY(creatorId) REFERENCES accounts(id)
     ) default charset utf8 COMMENT '';
+
+DROP TABLE vaultKeep 
