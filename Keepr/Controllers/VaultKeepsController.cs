@@ -35,5 +35,18 @@ namespace Keepr.Controllers
       }
     }
 
+    [HttpDelete]
+    [Authorize]
+    public ActionResult<string> DeleteVaultKeep()
+    {
+      try
+      {
+
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
   }
 }
