@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Keepr.Models;
 using Keepr.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -55,19 +56,20 @@ namespace Keepr.Services
     internal ActionResult<List<Vault>> GetProfileVaults(string id, Account userInfo)
     {
       List<Vault> vaults = _repo.GetProfileVaults(id);
-      if (userInfo.Id == id)
+      List<Vault> vaultsFiltered = vaults;
+      if (userInfo == null || userInfo.Id != id)
       {
-        return vaults;
-      }
-      int index = 0;
-      vaults.ForEach(v =>
-      {
-        if (v.IsPrivate)
+        int index = 0;
+        foreach (var v in vaultsFiltered.ToList())
         {
-          vaults.RemoveAt(index);
-          index++;
-        }
-      });
+          if (v.IsPrivate)
+          {
+            vaultsFiltered = vaultsFiltered.FindAll(vault => vault.Id != v.Id);
+            index++;
+          }
+        };
+        return vaultsFiltered;
+      }
       return vaults;
     }
   }
