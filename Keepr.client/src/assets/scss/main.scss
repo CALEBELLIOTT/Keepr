@@ -9,6 +9,7 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: $body-bg;
+  font-family: 'Inter', sans-serif;
 }
 
 main {
@@ -26,6 +27,7 @@ select {
     &:valid {
       border: 1px solid $success;
     }
+
     &:invalid {
       border: 1px solid $danger;
     }
