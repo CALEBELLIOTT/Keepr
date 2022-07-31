@@ -30,14 +30,6 @@ namespace Keepr.Services
     internal List<VaultKeepKeepViewModel> GetKeepsByVault(int id, Account userInfo)
     {
       Vault target = _vs.Get(id, userInfo);
-      if (userInfo.Id == null && target.IsPrivate)
-      {
-        throw new Exception("cannot access keeps on a private vault");
-      }
-      if (target.IsPrivate && userInfo.Id != target.CreatorId)
-      {
-        throw new Exception("cannot access keeps on a private vault");
-      }
       List<VaultKeepKeepViewModel> keeps = _repo.GetKeepsByVault(id);
       return keeps;
     }

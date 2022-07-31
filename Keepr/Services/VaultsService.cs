@@ -30,6 +30,15 @@ namespace Keepr.Services
     Get(int id, Account userInfo)
     {
       Vault targetVault = _repo.Get(id);
+      if (userInfo == null)
+      {
+        if (targetVault.IsPrivate)
+        {
+          throw new Exception("That Vault is Private");
+        }
+        return targetVault;
+      }
+
       if (targetVault.IsPrivate == true && targetVault.CreatorId != userInfo.Id)
       {
         throw new Exception("That Vault is Private");
@@ -51,6 +60,12 @@ namespace Keepr.Services
         throw new Exception("Not your Vault to delete");
       }
       return _repo.DeleteVault(id);
+    }
+
+    internal List<Vault> GetAccountVaults(string id)
+    {
+      List<Vault> vaults = _repo.GetProfileVaults(id);
+      return vaults;
     }
 
     internal ActionResult<List<Vault>> GetProfileVaults(string id, Account userInfo)
