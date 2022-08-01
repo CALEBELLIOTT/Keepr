@@ -31,7 +31,7 @@
                         Add To Vault
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li v-for="v in userVaults" :key="v.id"><a class="dropdown-item" href="#">Action</a></li>
+                        <li v-for="v in userVaults" :key="v.id"><a class="dropdown-item" href="#">{{ v.name }}</a></li>
                         <li v-if="userVaults.length < 1">Create a vault first</li>
                       </ul>
                     </div>
