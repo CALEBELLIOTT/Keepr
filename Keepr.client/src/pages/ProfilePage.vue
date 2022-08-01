@@ -11,7 +11,7 @@ import { useRoute } from "vue-router"
 
 export default {
   setup() {
-    let route = useRoute
+    let route = useRoute()
     return {
       route
     }

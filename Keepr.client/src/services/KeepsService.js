@@ -18,7 +18,7 @@ class KeepsService {
     try {
       const res = await api.post("api/keeps", data)
       AppState.keeps.push(res.data)
-      AppState.profileKeeps.push(res.data)
+      AppState.userKeeps.push(res.data)
     } catch (error) {
       console.error(error)
       Pop.toast(error.message)
