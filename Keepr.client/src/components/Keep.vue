@@ -6,7 +6,7 @@
       <img class="creator-img" :src="keep.creator.picture" alt="">
     </div> -->
 
-    <div class="keep-container" data-bs-target="#exampleModal" data-bs-toggle="modal">
+    <div class="keep-container" data-bs-target="#keepModal" data-bs-toggle="modal" @click="setActiveKeep()">
       <img :src="keep.img" alt="" class="img-fluid">
       <div class="d-flex justify-content-between img-text m-2">
         <h3 class="mx-2">{{ keep.name }}</h3>
@@ -18,10 +18,19 @@
 
 
 <script>
+import { AppState } from "../AppState"
+import { keepsService } from "../services/KeepsService"
+
 export default {
   props: { keep: { type: Object, required: true } },
-  setup() {
-    return {}
+  setup(props) {
+    return {
+      setActiveKeep() {
+        props.keep.views++
+        AppState.activeKeep = props.keep
+        keepsService.incrementViews(props.keep.id, props.keep)
+      }
+    }
   }
 }
 </script>

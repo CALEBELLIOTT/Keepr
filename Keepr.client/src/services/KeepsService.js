@@ -24,6 +24,15 @@ class KeepsService {
       Pop.toast(error.message)
     }
   }
+
+  async incrementViews(id, keep) {
+    try {
+      const res = await api.put("api/keeps/" + id, keep)
+    } catch (error) {
+      console.error(error)
+      Pop.toast(error.message, "error")
+    }
+  }
 }
 
 export const keepsService = new KeepsService()

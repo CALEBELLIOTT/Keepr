@@ -3,6 +3,7 @@
     <Navbar />
   </header>
   <main>
+    <KeepModal></KeepModal>
     <router-view />
   </main>
 </template>
