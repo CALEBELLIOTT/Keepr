@@ -31,7 +31,8 @@
                         Add To Vault
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li v-for="v in userVaults" :key="v.id"><a class="dropdown-item" href="#">{{ v.name }}</a></li>
+                        <li v-for="v in userVaults" :key="v.id"><a class="dropdown-item" href="#"
+                            @click="createVaultKeep(keep.id, v.id)">{{ v.name }}</a></li>
                         <li v-if="userVaults.length < 1">Create a vault first</li>
                       </ul>
                     </div>
@@ -53,6 +54,7 @@
 <script>
 import { computed } from "vue"
 import { AppState } from "../AppState"
+import { vaultKeepsService } from "../services/VaultKeepsService"
 
 export default {
   setup() {
@@ -60,7 +62,12 @@ export default {
     let userVaults = computed(() => AppState.userVaults)
     return {
       keep,
-      userVaults
+      userVaults,
+      async createVaultKeep(keepId, vaultId) {
+        let data = { keepId, vaultId }
+        console.log(data);
+        await vaultKeepsService.createVaultKeep(data)
+      }
     }
   }
 }
