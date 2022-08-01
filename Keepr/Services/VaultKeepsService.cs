@@ -17,6 +17,8 @@ namespace Keepr.Services
       _vs = vs;
     }
 
+
+    // TODO find a way to prevent multiple of the same keep being added to one vault
     internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData, Account userInfo)
     {
       Vault target = _vs.Get(vaultKeepData.VaultId, userInfo);
@@ -24,6 +26,13 @@ namespace Keepr.Services
       {
         throw new System.Exception("cannot add a keep to someone else's vault");
       }
+      // List<VaultKeepKeepViewModel> vaultKeeps = this.GetKeepsByVault(vaultKeepData.VaultId, userInfo);
+      // vaultKeeps.ForEach(k => {
+      //   if (k.)
+      //   {
+
+      //   }
+      // });
       return _repo.CreateVaultKeep(vaultKeepData);
     }
 
