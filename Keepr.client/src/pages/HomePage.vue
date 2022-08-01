@@ -9,6 +9,7 @@
 
 
   <CreateKeepModal />
+  <CreateVaultModal />
 </template>
 
 <script>

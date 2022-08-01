@@ -20,16 +20,23 @@ a {
   text-decoration: none;
 }
 
+.divider-line {
+  height: 2px;
+  width: 60%;
+  background-color: rgba(84, 83, 83, 0.121);
+  margin: auto;
+}
+
 input,
 textarea,
 select {
   &:not(:placeholder-shown) {
     &:valid {
-      border: 1px solid $success;
+      // border: 1px solid $success;
     }
 
     &:invalid {
-      border: 1px solid $danger;
+      // border: 1px solid $danger;
     }
   }
 }

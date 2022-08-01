@@ -1,10 +1,17 @@
 <template>
+  <!-- Toggle button that activates both create keep and create vault modal -->
+  <!-- TODO separate the dropdown button into its own component -->
   <div class="component">
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary modal-btn" data-bs-toggle="modal" data-bs-target="#createKeepModal">
-      <h2 class="p-0 m-0"><i class="mdi mdi-plus"></i></h2>
-    </button>
+    <div class="btn-group dropstart">
+      <button type="button" class="btn btn-primary dropdown-toggle modal-btn" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <h1 class="m-0"><i class="mdi mdi-plus p-0 m-0"></i></h1>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createVaultModal">Create Vault</a></li>
+        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createKeepModal">Create Keep</a></li>
+      </ul>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="createKeepModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -59,9 +66,17 @@ export default {
 
 <style lang="scss" scoped>
 .modal-btn {
-  position: absolute;
+  position: fixed;
   right: 1.5rem;
   bottom: 1.5rem;
   border-radius: 50%;
+}
+
+.dropdown-toggle::before {
+  content: none;
+}
+
+.dropdown-menu li:hover {
+  cursor: pointer;
 }
 </style>

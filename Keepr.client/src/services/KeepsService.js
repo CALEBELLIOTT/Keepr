@@ -26,7 +26,6 @@ class KeepsService {
   }
 
 
-  // TODO put in server requires auth. Need solution
   async incrementViews(id, keep) {
     try {
       const res = await api.put("api/keeps/" + id + "/view", keep)
