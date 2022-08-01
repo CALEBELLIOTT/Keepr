@@ -48,4 +48,8 @@ CREATE TABLE
         FOREIGN KEY(creatorId) REFERENCES accounts(id)
     ) default charset utf8 COMMENT '';
 
-DROP TABLE vaultKeep 
+DELETE FROM vaultKeeps;
+
+DELETE FROM vaults;
+
+DELETE FROM keeps;
