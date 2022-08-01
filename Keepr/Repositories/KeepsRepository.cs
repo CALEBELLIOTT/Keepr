@@ -90,6 +90,17 @@ namespace Keepr.Repositories
       return updatedKeep;
     }
 
+    internal Keep KeepIncrement(int id, Keep updated)
+    {
+      string sql = @"
+        UPDATE keeps SET
+            kept = @Kept
+        Where id = @Id;
+        ";
+      _db.Execute(sql, updated);
+      Keep updatedKeep = this.Get(id);
+      return updatedKeep;
+    }
 
     internal Keep ViewIncrement(int id, Keep updated)
     {

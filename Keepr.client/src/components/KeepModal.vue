@@ -32,14 +32,15 @@
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li v-for="v in userVaults" :key="v.id"><a class="dropdown-item" href="#"
-                            @click="createVaultKeep(keep.id, v.id)">{{ v.name }}</a></li>
+                            @click="createVaultKeep(keep.id, v.id, keep)">{{ v.name }}</a></li>
                         <li v-if="userVaults.length < 1">Create a vault first</li>
                       </ul>
                     </div>
                     <h2><i class="mdi mdi-trash-can-outline text-primary"></i></h2>
-                    <div class="bg-dark rounded m-2 p-2 d-flex">
-                      <!-- <img :src="keep.creator.picture" alt=""> -->
-                      <!-- <p class="m-0">{{ keep }}</p> -->
+                    <div class="bg-dark rounded m-2 p-2 d-flex align-items-center profile"
+                      @click="goToProfilePage(keep.creator?.id)" data-bs-toggle="modal" data-bs-target="#keepModal">
+                      <img class="profile-img" :src="keep.creator?.picture" alt="">
+                      <p class="mx-2 my-0">{{ keep.creator?.name }}</p>
                     </div>
                   </div>
                 </div>
@@ -58,20 +59,27 @@
 
 <script>
 import { computed } from "vue"
+import { useRouter } from "vue-router"
 import { AppState } from "../AppState"
 import { vaultKeepsService } from "../services/VaultKeepsService"
+import { keepsService } from "../services/KeepsService"
 
 export default {
   setup() {
     let keep = computed(() => AppState.activeKeep)
     let userVaults = computed(() => AppState.userVaults)
+    let router = useRouter();
     return {
       keep,
       userVaults,
-      async createVaultKeep(keepId, vaultId) {
+      async createVaultKeep(keepId, vaultId, keep) {
         let data = { keepId, vaultId }
         console.log(data);
         await vaultKeepsService.createVaultKeep(data)
+        await keepsService.incrementKeeps(keepId, keep)
+      },
+      goToProfilePage(id) {
+        router.push({ name: "Profile", params: { id } })
       }
     }
   }
@@ -83,5 +91,20 @@ export default {
 .keep-img {
   height: 70vh;
   object-fit: cover;
+}
+
+.profile-img {
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.profile:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: 400ms;
+}
+
+.profile {
+  transition: 400ms;
 }
 </style>

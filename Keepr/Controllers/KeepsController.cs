@@ -96,6 +96,21 @@ namespace Keepr.Controllers
       }
     }
 
+    [HttpPut("{id}/keep")]
+    public async Task<ActionResult<Keep>> KeepIncrement(int id, [FromBody] Keep updated)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        Keep edited = _ks.KeepIncrement(id, userInfo, updated);
+        return edited;
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
     [HttpDelete("{id}")]
     [Authorize]
     public async Task<ActionResult<string>> DeleteKeepAsync(int id)

@@ -34,6 +34,17 @@ class KeepsService {
       Pop.toast(error.message, "error")
     }
   }
+
+  async incrementKeeps(keepId, keep) {
+    try {
+      keep.kept++
+      const res = await api.put("api/keeps/" + keepId + "/keep", keep)
+      console.log(res.data);
+    } catch (error) {
+      console.error(error)
+      Pop.toast(error.message, "error")
+    }
+  }
 }
 
 export const keepsService = new KeepsService()

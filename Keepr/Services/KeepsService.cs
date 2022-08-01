@@ -72,5 +72,12 @@ namespace Keepr.Services
       }
       return _repo.DeleteKeep(id);
     }
+
+    internal Keep KeepIncrement(int id, Account userInfo, Keep updated)
+    {
+      Keep target = this.Get(id);
+      updated.Id = id;
+      return _repo.KeepIncrement(id, updated);
+    }
   }
 }
