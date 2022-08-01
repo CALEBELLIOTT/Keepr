@@ -15,6 +15,26 @@ class ProfilesService {
       Pop.toast(error.message, "error")
     }
   }
+
+  async getProfileVaults(id) {
+    try {
+      const res = await api.get(`api/profiles/${id}/vaults`)
+      AppState.profileVaults = res.data
+    } catch (error) {
+      console.error(error)
+      Pop.toast(error.message)
+    }
+  }
+
+  async getProfile(id) {
+    try {
+      const res = await api.get(`api/profiles/${id}`)
+      AppState.activeProfile = res.data
+    } catch (error) {
+      console.error(error)
+      Pop.toast(error.message)
+    }
+  }
 }
 
 export const profilesService = new ProfilesService()
