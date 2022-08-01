@@ -24,7 +24,7 @@
                     <p class="mt-3 mx-5">{{ keep.description }}</p>
                     <div class="divider-line"></div>
                   </div>
-                  <div class="my-5">
+                  <div class="my-5 d-flex justify-content-between align-items-center">
                     <div class="dropdown">
                       <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,6 +35,11 @@
                             @click="createVaultKeep(keep.id, v.id)">{{ v.name }}</a></li>
                         <li v-if="userVaults.length < 1">Create a vault first</li>
                       </ul>
+                    </div>
+                    <h2><i class="mdi mdi-trash-can-outline text-primary"></i></h2>
+                    <div class="bg-dark rounded m-2 p-2 d-flex">
+                      <!-- <img :src="keep.creator.picture" alt=""> -->
+                      <!-- <p class="m-0">{{ keep }}</p> -->
                     </div>
                   </div>
                 </div>
