@@ -50,6 +50,13 @@ namespace Keepr.Services
       return _repo.Edit(id, updated);
     }
 
+    internal Keep ViewIncrement(int id, Account userInfo, Keep updated)
+    {
+      Keep target = this.Get(id);
+      updated.Id = id;
+      return _repo.ViewIncrement(id, updated);
+    }
+
     internal List<Keep> GetProfileKeeps(string id)
     {
       List<Keep> keeps = _repo.GetProfileKeeps(id);

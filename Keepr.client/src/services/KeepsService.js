@@ -25,9 +25,11 @@ class KeepsService {
     }
   }
 
+
+  // TODO put in server requires auth. Need solution
   async incrementViews(id, keep) {
     try {
-      const res = await api.put("api/keeps/" + id, keep)
+      const res = await api.put("api/keeps/" + id + "/view", keep)
     } catch (error) {
       console.error(error)
       Pop.toast(error.message, "error")

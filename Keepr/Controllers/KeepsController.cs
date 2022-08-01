@@ -67,12 +67,27 @@ namespace Keepr.Controllers
 
     [HttpPut("{id}")]
     [Authorize]
-    public async Task<ActionResult<Keep>> editAsync(int id, [FromBody] Keep updated)
+    public async Task<ActionResult<Keep>> EditAsync(int id, [FromBody] Keep updated)
     {
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
         Keep edited = _ks.Edit(id, userInfo, updated);
+        return edited;
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpPut("{id}/view")]
+    public async Task<ActionResult<Keep>> ViewIncrement(int id, [FromBody] Keep updated)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        Keep edited = _ks.ViewIncrement(id, userInfo, updated);
         return edited;
       }
       catch (System.Exception e)
