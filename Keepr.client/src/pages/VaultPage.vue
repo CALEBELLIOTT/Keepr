@@ -68,12 +68,4 @@ export default {
 button {
   height: fit-content;
 }
-
-.masonry-frame {
-  columns: 4;
-
-  div {
-    break-inside: avoid;
-  }
-}
 </style>

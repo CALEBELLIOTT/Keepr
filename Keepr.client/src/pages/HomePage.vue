@@ -29,11 +29,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.masonry-frame {
-  columns: 4;
+// .masonry-frame {
+//   columns: 4;
 
-  div {
-    break-inside: avoid;
-  }
-}
+//   div {
+//     break-inside: avoid;
+//   }
+// }
 </style>

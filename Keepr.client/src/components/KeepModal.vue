@@ -10,9 +10,9 @@
               <div class="col-md-6">
                 <img :src="keep.img" class="keep-img img-fluid" alt="">
               </div>
-              <div class="col-md-6 position-relative">
+              <div class="col-md-6 position-md-relative">
                 <div
-                  class="d-flex flex-column mt-4 justify-content-between position-absolute top-0 bottom-0 end-0 start-0 pe-3">
+                  class="d-flex flex-column mt-4 justify-content-between position-md-absolute top-md-0 bottom-md-0 end-md-0 start-md-0 pe-3">
                   <div class=" d-flex justify-content-center fs-4 text-primary">
                     <i class="mdi mdi-eye"></i>
                     <p class="ms-1 me-4">{{ keep.views }}</p>
@@ -29,8 +29,8 @@
                       @click="deleteVaultKeep(keep.vaultKeepId)" data-bs-toggle="modal"
                       data-bs-target="#keepModal">Remove From Vault</button>
                     <div class="dropdown" v-if="route.name != 'Vault' && account.id">
-                      <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                      <button class="btn btn-outline-primary dropdown-toggle mx-2" type="button"
+                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         Add To Vault
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

@@ -31,6 +31,54 @@ a {
   margin: auto;
 }
 
+.masonry-frame {
+  columns: 1;
+
+  div {
+    break-inside: avoid;
+  }
+}
+
+@media (max-width: 12000px) {
+  .masonry-frame {
+    columns: 4;
+
+    div {
+      break-inside: avoid;
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .masonry-frame {
+    columns: 3;
+
+    div {
+      break-inside: avoid;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .masonry-frame {
+    columns: 2;
+
+    div {
+      break-inside: avoid;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .masonry-frame {
+    columns: 1;
+
+    div {
+      break-inside: avoid;
+    }
+  }
+}
+
 input,
 textarea,
 select {

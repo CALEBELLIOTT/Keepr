@@ -16,11 +16,13 @@
       <div class="col-12">
         <h3 class="mt-4">Vaults<span class="text-primary"><i class="mdi mdi-plus"></i></span></h3>
       </div>
-      <div class="col-6 col-md-3" v-for="v in vaults" :key="v.id">
-        <div :style="`background-image: url(${v.img});`" class="text-light vault-container m-0 p-2 position-relative"
-          @click="navToVaultPage(v.id)">
-          <div class="d-flex align-items-end position-absolute top-0 bottom-0">
-            <h3>{{ v.name }}</h3>
+      <div class="vault-row d-flex">
+        <div class="mx-2" v-for="v in vaults" :key="v.id">
+          <div :style="`background-image: url(${v.img});`" class="text-light vault-container m-0 p-2 position-relative"
+            @click="navToVaultPage(v.id)">
+            <div class="d-flex align-items-end position-absolute top-0 bottom-0">
+              <h3>{{ v.name }}</h3>
+            </div>
           </div>
         </div>
       </div>
@@ -105,11 +107,7 @@ export default {
   text-shadow: 1px 1px rgba(57, 56, 56, 0.868);
 }
 
-.masonry-frame {
-  columns: 4;
-
-  div {
-    break-inside: avoid;
-  }
+.vault-row {
+  overflow-x: scroll;
 }
 </style>
