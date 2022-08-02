@@ -41,6 +41,17 @@ a {
 
 @media (max-width: 12000px) {
   .masonry-frame {
+    columns: 5;
+    margin-bottom: 2rem;
+
+    div {
+      break-inside: avoid;
+    }
+  }
+}
+
+@media (max-width: 1600px) {
+  .masonry-frame {
     columns: 4;
     margin-bottom: 2rem;
 

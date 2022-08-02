@@ -22,15 +22,14 @@
               <h3>Create a New Keep</h3>
               <form action="" @submit.prevent="createKeep()" id="create-keep-form">
                 <label for="">Title</label>
-                <input type="text" class="form-control" placeholder="title..." v-model="keepData.name">
+                <input type="text" class="form-control" placeholder="title..." v-model="keepData.name" required>
                 <label for="" class="mt-2">Img Url</label>
-                <input type="text" class="form-control" placeholder="image url..." v-model="keepData.img">
+                <input type="text" class="form-control" placeholder="image url..." v-model="keepData.img" required>
                 <label for="" class="mt-2">Description</label>
-                <textarea name="" id="" cols="30" rows="6" placeholder="description..." class="form-control"
+                <textarea name="" id="" cols="30" rows="6" placeholder="description..." required class="form-control"
                   v-model="keepData.description"></textarea>
                 <div class="d-flex justify-content-end mt-4">
-                  <button class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#createKeepModal">submit</button>
+                  <button class="btn btn-primary">submit</button>
                 </div>
               </form>
             </div>
@@ -48,19 +47,18 @@
               <h3>Create a New Vault</h3>
               <form action="" @submit.prevent="createVault()" id="create-vault-form">
                 <label for="">Title</label>
-                <input type="text" class="form-control" placeholder="title..." v-model="vaultData.name">
+                <input type="text" class="form-control" placeholder="title..." v-model="vaultData.name" required>
                 <label for="" class="mt-2">Img Url</label>
-                <input type="text" class="form-control" placeholder="image url..." v-model="vaultData.img">
+                <input type="text" class="form-control" placeholder="image url..." v-model="vaultData.img" required>
                 <label for="" class="mt-2">Description</label>
                 <textarea name="" id="" cols="30" rows="6" placeholder="description..." class="form-control"
-                  v-model="vaultData.description"></textarea>
+                  v-model="vaultData.description" required></textarea>
                 <label for="" class="mt-3">Private?</label><br>
                 <input type="checkbox" class="" v-model="vaultData.isPrivate" :true-value="true"
                   :false-value="false"><br>
                 <small class="text-muted">(Private vaults can only be viewed by you)</small>
                 <div class="d-flex justify-content-end mt-4">
-                  <button class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#createVaultModal">submit</button>
+                  <button class="btn btn-primary">submit</button>
                 </div>
               </form>
             </div>
@@ -77,6 +75,8 @@
 import { ref } from "vue"
 import { keepsService } from "../services/KeepsService"
 import { vaultsService } from "../services/VaultsService"
+import { Modal } from 'bootstrap'
+
 
 export default {
   setup() {
@@ -89,12 +89,15 @@ export default {
         keepData.value.views = 0
         keepData.value.kept = 0
         await keepsService.createKeep(keepData.value)
+        Modal.getOrCreateInstance(document.getElementById('createKeepModal')).hide()
         document.getElementById("create-keep-form").reset()
         keepData.value = {}
       },
       async createVault() {
         if (!vaultData.value.isPrivate) {
           vaultData.value.isPrivate = false
+          document.getElementById("create-vault-form").reset()
+          Modal.getOrCreateInstance(document.getElementById('createVaultModal')).hide()
         }
         console.log(vaultData.value);
         await vaultsService.createVault(vaultData.value)

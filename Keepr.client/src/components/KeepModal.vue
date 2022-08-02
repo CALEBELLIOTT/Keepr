@@ -10,14 +10,19 @@
               <div class="col-md-6">
                 <img :src="keep.img" class="keep-img img-fluid" alt="">
               </div>
-              <div class="col-md-6 position-md-relative">
-                <div
-                  class="d-flex flex-column mt-4 justify-content-between position-md-absolute top-md-0 bottom-md-0 end-md-0 start-md-0 pe-3">
+              <div class="col-md-6">
+                <div class="d-flex flex-column mt-4 justify-content-between h-100 pe-3">
                   <div class=" d-flex justify-content-center fs-4 text-primary">
                     <i class="mdi mdi-eye"></i>
                     <p class="ms-1 me-4">{{ keep.views }}</p>
-                    <i class="mdi mdi-alpha-k-box-outline"></i>
-                    <p class="ms-1 me-4">{{ keep.kept }}</p>
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+                        <i class="mdi mdi-alpha-k-box-outline"></i>
+                        <p class="ms-1 me-4">{{ keep.kept }}</p>
+                      </div>
+                      <i class="mdi mdi-close d-md-none text-danger keep-close-container" data-bs-toggle="modal"
+                        data-bs-target="#keepModal"></i>
+                    </div>
                   </div>
                   <div class="d-flex flex-column mb-5">
                     <h2 class="align-self-center my-5">{{ keep.name }}</h2>
@@ -93,15 +98,15 @@ export default {
       },
       async deleteVaultKeep(id) {
         if (await Pop.confirm("are you sure you want to remove this keep?")) {
-          await vaultKeepsService.deleteVaultKeep(id)
           Modal.getOrCreateInstance(document.getElementById('keepModal')).hide()
-
+          await vaultKeepsService.deleteVaultKeep(id)
         }
       },
       async deleteKeep(id) {
         if (await Pop.confirm("are you sure you want to delete the keep?", "This cannot be undone", "warning")
         ) {
           await keepsService.deleteKeep(id)
+          Modal.getOrCreateInstance(document.getElementById('keepModal')).hide()
         }
       },
 
@@ -146,6 +151,15 @@ export default {
 }
 
 .dropdown-item:hover {
+  cursor: pointer;
+}
+
+.keep-close-container {
+  position: absolute;
+  right: 1em;
+}
+
+.keep-close-container i:hover {
   cursor: pointer;
 }
 </style>

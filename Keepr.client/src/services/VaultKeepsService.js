@@ -23,7 +23,8 @@ class VaultKeepsService {
       console.log(AppState.activeVaultKeeps);
     } catch (error) {
       console.error(error)
-      Pop.toast(error.message, "error")
+      Pop.toast(error.response.data, "error")
+
     }
   }
 
