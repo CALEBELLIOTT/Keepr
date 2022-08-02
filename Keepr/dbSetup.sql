@@ -1,3 +1,5 @@
+-- Active: 1658254601060@@SG-CalebDev-6476-mysql-master.servers.mongodirector.com@3306
+
 CREATE TABLE
     IF NOT EXISTS accounts(
         id VARCHAR(255) NOT NULL primary key COMMENT 'primary key',
@@ -19,7 +21,7 @@ CREATE TABLE
         views int Comment 'Keep number of views',
         kept int COMMENT 'Keep number of kepts',
         creatorId VARCHAR(225) NOT NULL,
-        FOREIGN KEY(creatorId) REFERENCES accounts(id)
+        FOREIGN KEY(creatorId) REFERENCES accounts(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -32,7 +34,7 @@ CREATE TABLE
         img TEXT COMMENT 'Vault Image',
         isPrivate TINYINT COMMENT 'True if Vault is privated',
         creatorId VARCHAR(225) NOT NULL,
-        FOREIGN KEY(creatorId) REFERENCES accounts(id)
+        FOREIGN KEY(creatorId) REFERENCES accounts(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -43,9 +45,9 @@ CREATE TABLE
         keepId Int NOT NULL COMMENT 'Id of associated Keep',
         vaultId INT NOT NULL COMMENT 'Id of assciated Vault',
         creatorId VARCHAR(225) NOT NULL COMMENT 'Id of assciated creator',
-        FOREIGN KEY(vaultId) REFERENCES vaults(id),
-        FOREIGN KEY(keepId) REFERENCES keeps(id),
-        FOREIGN KEY(creatorId) REFERENCES accounts(id)
+        FOREIGN KEY(vaultId) REFERENCES vaults(id) ON DELETE CASCADE,
+        FOREIGN KEY(keepId) REFERENCES keeps(id) ON DELETE CASCADE,
+        FOREIGN KEY(creatorId) REFERENCES accounts(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 DELETE FROM vaultKeeps;
@@ -53,3 +55,9 @@ DELETE FROM vaultKeeps;
 DELETE FROM vaults;
 
 DELETE FROM keeps;
+
+DROP TABLE vaultKeeps;
+
+DROP TABLE keeps;
+
+DROP TABLE vaults;

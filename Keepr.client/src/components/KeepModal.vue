@@ -25,7 +25,10 @@
                     <div class="divider-line"></div>
                   </div>
                   <div class="my-5 d-flex justify-content-between align-items-center">
-                    <div class="dropdown">
+                    <button class="btn btn-outline-danger" v-if="route.name == 'Vault' && account.id == keep.creatorId"
+                      @click="deleteVaultKeep(keep.vaultKeepId)" data-bs-toggle="modal"
+                      data-bs-target="#keepModal">Remove From Vault</button>
+                    <div class="dropdown" v-if="route.name != 'Vault' && account.id">
                       <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Add To Vault
@@ -36,7 +39,9 @@
                         <li v-if="userVaults.length < 1">Create a vault first</li>
                       </ul>
                     </div>
-                    <h2><i class="mdi mdi-trash-can-outline text-primary"></i></h2>
+                    <h2 v-if="keep.creator?.id == account.id" @click="deleteKeep(keep.id)"><i
+                        class="mdi mdi-trash-can-outline text-primary cursor-pointer"></i>
+                    </h2>
                     <div class="bg-dark rounded m-2 p-2 d-flex align-items-center profile"
                       @click="goToProfilePage(keep.creator?.id)" data-bs-toggle="modal" data-bs-target="#keepModal">
                       <img class="profile-img" :src="keep.creator?.picture" alt="">
@@ -59,7 +64,7 @@
 
 <script>
 import { computed } from "vue"
-import { useRouter } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import { AppState } from "../AppState"
 import { vaultKeepsService } from "../services/VaultKeepsService"
 import { keepsService } from "../services/KeepsService"
@@ -69,9 +74,13 @@ export default {
     let keep = computed(() => AppState.activeKeep)
     let userVaults = computed(() => AppState.userVaults)
     let router = useRouter();
+    let route = useRoute();
+    let account = computed(() => AppState.account)
     return {
       keep,
       userVaults,
+      route,
+      account,
       async createVaultKeep(keepId, vaultId, keep) {
         let data = { keepId, vaultId }
         console.log(data);
@@ -80,6 +89,13 @@ export default {
       },
       goToProfilePage(id) {
         router.push({ name: "Profile", params: { id } })
+        console.log(route.name);
+      },
+      async deleteVaultKeep(id) {
+        await vaultKeepsService.deleteVaultKeep(id)
+      },
+      async deleteKeep(id) {
+        await keepsService.deleteKeep(id)
       }
     }
   }

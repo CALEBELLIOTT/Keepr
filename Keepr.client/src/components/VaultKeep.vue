@@ -1,11 +1,5 @@
 <template>
   <div class="component">
-    <!-- <div class="p-2 keep-container d-flex align-items-end justify-content-between"
-      :style="`background-image: url('${keep.img}');`">
-      <h3>{{ keep.name }}</h3>
-      <img class="creator-img" :src="keep.creator.picture" alt="">
-    </div> -->
-
     <div class="keep-container" data-bs-target="#keepModal" data-bs-toggle="modal" @click="setActiveKeep()">
       <img :src="keep.img" alt="" class="img-fluid">
       <div class="d-flex justify-content-between img-text mx-2">
@@ -55,7 +49,7 @@ export default {
 
 .img-text {
   position: absolute;
-  z-index: 1;
+  z-index: 100;
   bottom: 0;
   left: 0;
   right: 0;

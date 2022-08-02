@@ -45,6 +45,16 @@ class KeepsService {
       Pop.toast(error.message, "error")
     }
   }
+
+  async deleteKeep(id) {
+    try {
+      const res = await api.delete("api/keeps/" + id)
+      console.log(res.data);
+    } catch (error) {
+      console.error(error)
+      Pop.toast(error.message, "error")
+    }
+  }
 }
 
 export const keepsService = new KeepsService()

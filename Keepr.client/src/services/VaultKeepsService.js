@@ -22,9 +22,21 @@ class VaultKeepsService {
     try {
       const res = await api.get(`api/vaults/${vaultId}/keeps`)
       AppState.activeVaultKeeps = res.data
+      console.log(AppState.activeVaultKeeps);
     } catch (error) {
       console.error(error)
       Pop.toast(error.message, "error")
+    }
+  }
+
+  async deleteVaultKeep(id) {
+    try {
+      const res = await api.delete(`api/vaultkeeps/${id}`)
+      AppState.activeVaultKeeps = AppState.activeVaultKeeps.filter(vk => vk.vaultKeepId != id)
+      console.log(res.data);
+    } catch (error) {
+      console.error(error)
+      Pop.toast(error.message)
     }
   }
 }

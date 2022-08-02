@@ -118,4 +118,8 @@ export default {
 .dropdown-menu li:hover {
   cursor: pointer;
 }
+
+.dropstart button {
+  z-index: 1000;
+}
 </style>
