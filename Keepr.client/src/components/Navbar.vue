@@ -5,9 +5,6 @@
         <img alt="logo" src="../assets/img/k-logo-png-transparent.png" height="45" />
       </div>
     </router-link>
-    <form action="">
-      <input type="text" placeholder="Search...">
-    </form>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon" />

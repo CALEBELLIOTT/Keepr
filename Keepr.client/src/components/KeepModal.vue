@@ -34,7 +34,7 @@
                         Add To Vault
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li v-for="v in userVaults" :key="v.id"><a class="dropdown-item" href="#"
+                        <li v-for="v in userVaults" :key="v.id"><a class="dropdown-item"
                             @click="createVaultKeep(keep.id, v.id, keep)">{{ v.name }}</a></li>
                         <li v-if="userVaults.length < 1">Create a vault first</li>
                       </ul>
@@ -69,6 +69,7 @@ import { AppState } from "../AppState"
 import { vaultKeepsService } from "../services/VaultKeepsService"
 import { keepsService } from "../services/KeepsService"
 import Pop from "../utils/Pop"
+import { Modal } from 'bootstrap'
 
 export default {
   setup() {
@@ -93,6 +94,8 @@ export default {
       async deleteVaultKeep(id) {
         if (await Pop.confirm("are you sure you want to remove this keep?")) {
           await vaultKeepsService.deleteVaultKeep(id)
+          Modal.getOrCreateInstance(document.getElementById('keepModal')).hide()
+
         }
       },
       async deleteKeep(id) {
@@ -140,5 +143,9 @@ export default {
 
 .profile {
   transition: 400ms;
+}
+
+.dropdown-item:hover {
+  cursor: pointer;
 }
 </style>
