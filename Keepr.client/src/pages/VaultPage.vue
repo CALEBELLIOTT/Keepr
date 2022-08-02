@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="d-flex justify-content-between">
-      <div>
+      <div class="mt-4">
         <h1>{{ vault.name }}</h1>
         <p>Keeps: {{ keeps.length }}</p>
       </div>
