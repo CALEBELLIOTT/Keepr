@@ -31,8 +31,8 @@
           <h3>Keeps<span class="text-primary"><i class="mdi mdi-plus"></i></span></h3>
         </div>
       </div>
-      <div class="col-6 col-md-3" v-for="k in keeps" :key="k.id">
-        <Keep :keep="k"></Keep>
+      <div class="masonry-frame">
+        <Keep class="my-2" v-for="k in keeps" :key="k.id" :keep="k"></Keep>
       </div>
     </div>
   </div>
@@ -104,5 +104,13 @@ export default {
 .vault-container h3 {
   text-shadow: 1px 1px rgba(119, 119, 119, 0.307);
   background-color: rgba(119, 119, 119, 0.307);
+}
+
+.masonry-frame {
+  columns: 4;
+
+  div {
+    break-inside: avoid;
+  }
 }
 </style>

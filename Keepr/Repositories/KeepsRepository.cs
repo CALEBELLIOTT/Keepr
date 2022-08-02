@@ -126,9 +126,19 @@ namespace Keepr.Repositories
     internal List<Keep> GetProfileKeeps(string id)
     {
       string sql = @"
-      SELECT * FROM keeps WHERE creatorId = @id;
+        SELECT 
+            k.*,
+            a.*
+        FROM 
+            keeps k
+        JOIN accounts a ON k.creatorId = a.id
+        WHERE creatorId = @id
       ";
-      return _db.Query<Keep>(sql, new { id }).ToList();
+      return _db.Query<Keep, Profile, Keep>(sql, (keep, prof) =>
+      {
+        keep.Creator = prof;
+        return keep;
+      }, new { id }).ToList();
     }
 
   }
