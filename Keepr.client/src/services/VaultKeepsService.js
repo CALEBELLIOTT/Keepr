@@ -1,3 +1,4 @@
+import { AppState } from "../AppState";
 import Pop from "../utils/Pop";
 import { api } from "./AxiosService"
 import { keepsService } from "./KeepsService";
@@ -14,6 +15,16 @@ class VaultKeepsService {
     } catch (error) {
       Pop.toast(error.message)
       console.error(error)
+    }
+  }
+
+  async getVaultKeeps(vaultId) {
+    try {
+      const res = await api.get(`api/vaults/${vaultId}/keeps`)
+      AppState.activeVaultKeeps = res.data
+    } catch (error) {
+      console.error(error)
+      Pop.toast(error.message, "error")
     }
   }
 }
