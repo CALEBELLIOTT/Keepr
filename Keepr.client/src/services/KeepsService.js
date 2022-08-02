@@ -45,6 +45,15 @@ class KeepsService {
       Pop.toast(error.message, "error")
     }
   }
+
+  async getVaultKeeps() {
+    try {
+
+    } catch (error) {
+      console.error(error)
+      Pop.toast(error.message, "error")
+    }
+  }
 }
 
 export const keepsService = new KeepsService()
