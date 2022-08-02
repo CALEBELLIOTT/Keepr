@@ -9,8 +9,6 @@ class VaultKeepsService {
 
     try {
       const res = await api.post("api/vaultKeeps", data)
-      await keepsService.incrementKeeps(data)
-      console.log(res.data);
       Pop.toast("Keep Successfully Added to Vault!", "success")
     } catch (error) {
       Pop.toast(error.message)

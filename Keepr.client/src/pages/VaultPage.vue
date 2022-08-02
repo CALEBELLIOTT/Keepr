@@ -38,8 +38,11 @@ export default {
     let account = computed(() => AppState.account)
     let router = useRouter()
     onMounted(async () => {
+      let vault = await vaultsService.getVault(route.params.id)
+      if (!vault && vault?.creatorId != account.id) {
+        router.push({ name: "Home" })
+      }
       await vaultKeepsService.getVaultKeeps(route.params.id)
-      await vaultsService.getVault(route.params.id)
     })
     return {
       keeps,
@@ -47,7 +50,7 @@ export default {
       account,
       router,
       route,
-      async deleteVault(id, account) {
+      async deleteVault(id) {
         if (await Pop.confirm("Are you sure you want to delete the vault?", "This cannot be undone", "warning")
         ) {
           await vaultsService.deleteVault(id)

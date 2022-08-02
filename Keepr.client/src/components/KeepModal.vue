@@ -92,8 +92,9 @@ export default {
         console.log(route.name);
       },
       async deleteVaultKeep(id) {
-        if (await Pop.confirm("are you sure you want to remove this keep?"))
+        if (await Pop.confirm("are you sure you want to remove this keep?")) {
           await vaultKeepsService.deleteVaultKeep(id)
+        }
       },
       async deleteKeep(id) {
         if (await Pop.confirm("are you sure you want to delete the keep?", "This cannot be undone", "warning")

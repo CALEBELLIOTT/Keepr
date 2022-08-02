@@ -1,6 +1,8 @@
 import { AppState } from "../AppState";
+import { router } from "../router";
 import Pop from "../utils/Pop";
 import { api } from "./AxiosService"
+
 
 class KeepsService {
   async getAllKeeps() {
@@ -37,9 +39,8 @@ class KeepsService {
 
   async incrementKeeps(keepId, keep) {
     try {
-      keep.kept++
+      keep.kept += 1
       const res = await api.put("api/keeps/" + keepId + "/keep", keep)
-      console.log(res.data);
     } catch (error) {
       console.error(error)
       Pop.toast(error.message, "error")
@@ -49,7 +50,9 @@ class KeepsService {
   async deleteKeep(id) {
     try {
       const res = await api.delete("api/keeps/" + id)
-      console.log(res.data);
+      AppState.keeps = AppState.keeps.filter(k => k.id != id)
+      AppState.profileKeeps = AppState.profileKeeps.filter(k => k.id != id)
+      AppState.userKeeps = AppState.userKeeps.filter(k => k.id != id)
     } catch (error) {
       console.error(error)
       Pop.toast(error.message, "error")

@@ -1,10 +1,13 @@
 <template>
-  <div class="masonry-frame mt-2">
-    <div v-for="k in keeps" :key="k.id" class="">
-      <Keep :keep="k" class="my-2"></Keep>
-    </div>
-  </div>
+  <div class="container">
 
+    <div class="masonry-frame mt-2">
+      <div v-for="k in keeps" :key="k.id" class="">
+        <Keep :keep="k" class="my-2"></Keep>
+      </div>
+    </div>
+
+  </div>
 
 
 

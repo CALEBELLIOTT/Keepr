@@ -1,4 +1,5 @@
 import { AppState } from "../AppState"
+import { router } from "../router"
 import Pop from "../utils/Pop"
 import { api } from "./AxiosService"
 
@@ -19,8 +20,9 @@ class VaultsService {
       const res = await api.get("api/vaults/" + vaultId)
       AppState.activeVault = res.data
     } catch (error) {
-      console.error(error)
-      Pop.toast(error.message, "error")
+      console.error(error.response)
+      Pop.toast(error.response.data, "error")
+      router.push({ name: "Home" })
     }
   }
 
