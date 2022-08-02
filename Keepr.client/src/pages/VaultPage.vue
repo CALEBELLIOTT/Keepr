@@ -5,7 +5,8 @@
         <h1>{{ vault.name }}</h1>
         <p>Keeps: {{ keeps.length }}</p>
       </div>
-      <button class="btn btn-outline-danger mt-3" v-if="account.id == vault.creatorId">delete vault</button>
+      <button class="btn btn-outline-danger mt-3" v-if="account.id == vault.creatorId"
+        @click="deleteVault(vault.id)">delete vault</button>
     </div>
 
     <div class="masonry-frame mt-5">
@@ -23,10 +24,11 @@
 
 <script>
 import { computed, onMounted } from "vue"
-import { useRoute } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import { AppState } from "../AppState"
 import { vaultKeepsService } from "../services/VaultKeepsService"
 import { vaultsService } from "../services/VaultsService"
+import Pop from "../utils/Pop"
 
 export default {
   setup() {
@@ -34,6 +36,7 @@ export default {
     let keeps = computed(() => AppState.activeVaultKeeps)
     let vault = computed(() => AppState.activeVault)
     let account = computed(() => AppState.account)
+    let router = useRouter()
     onMounted(async () => {
       await vaultKeepsService.getVaultKeeps(route.params.id)
       await vaultsService.getVault(route.params.id)
@@ -41,7 +44,17 @@ export default {
     return {
       keeps,
       vault,
-      account
+      account,
+      router,
+      route,
+      async deleteVault(id, account) {
+        if (await Pop.confirm("Are you sure you want to delete the vault?", "This cannot be undone", "warning")
+        ) {
+          await vaultsService.deleteVault(id)
+          router.push({ name: "Profile", params: { id: AppState.account.id } })
+          Pop.toast("Vault Deleted", "success")
+        }
+      }
     }
   }
 }

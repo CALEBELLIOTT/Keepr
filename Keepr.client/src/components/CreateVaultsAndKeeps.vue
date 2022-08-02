@@ -29,7 +29,8 @@
                 <textarea name="" id="" cols="30" rows="6" placeholder="description..." class="form-control"
                   v-model="keepData.description"></textarea>
                 <div class="d-flex justify-content-end mt-4">
-                  <button class="btn btn-primary">submit</button>
+                  <button class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#createKeepModal">submit</button>
                 </div>
               </form>
             </div>
@@ -58,7 +59,8 @@
                   :false-value="false"><br>
                 <small class="text-muted">(Private vaults can only be viewed by you)</small>
                 <div class="d-flex justify-content-end mt-4">
-                  <button class="btn btn-primary">submit</button>
+                  <button class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#createVaultModal">submit</button>
                 </div>
               </form>
             </div>

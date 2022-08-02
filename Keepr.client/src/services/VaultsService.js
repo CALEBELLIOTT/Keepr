@@ -24,6 +24,16 @@ class VaultsService {
     }
   }
 
+  async deleteVault(id) {
+    try {
+      const res = await api.delete("api/vaults/" + id)
+      console.log(res.data);
+    } catch (error) {
+      console.error(error)
+      Pop.toast(error.message, "error")
+    }
+  }
+
 
 }
 

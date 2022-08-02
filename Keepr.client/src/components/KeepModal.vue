@@ -25,7 +25,7 @@
                     <div class="divider-line"></div>
                   </div>
                   <div class="my-5 d-flex justify-content-between align-items-center">
-                    <button class="btn btn-outline-danger" v-if="route.name == 'Vault' && account.id == keep.creatorId"
+                    <button class="btn btn-outline-danger" v-if="route.name == 'Vault' && checkVault()"
                       @click="deleteVaultKeep(keep.vaultKeepId)" data-bs-toggle="modal"
                       data-bs-target="#keepModal">Remove From Vault</button>
                     <div class="dropdown" v-if="route.name != 'Vault' && account.id">
@@ -68,6 +68,7 @@ import { useRoute, useRouter } from "vue-router"
 import { AppState } from "../AppState"
 import { vaultKeepsService } from "../services/VaultKeepsService"
 import { keepsService } from "../services/KeepsService"
+import Pop from "../utils/Pop"
 
 export default {
   setup() {
@@ -83,7 +84,6 @@ export default {
       account,
       async createVaultKeep(keepId, vaultId, keep) {
         let data = { keepId, vaultId }
-        console.log(data);
         await vaultKeepsService.createVaultKeep(data)
         await keepsService.incrementKeeps(keepId, keep)
       },
@@ -92,14 +92,32 @@ export default {
         console.log(route.name);
       },
       async deleteVaultKeep(id) {
-        await vaultKeepsService.deleteVaultKeep(id)
+        if (await Pop.confirm("are you sure you want to remove this keep?"))
+          await vaultKeepsService.deleteVaultKeep(id)
       },
       async deleteKeep(id) {
-        await keepsService.deleteKeep(id)
+        if (await Pop.confirm("are you sure you want to delete the keep?", "This cannot be undone", "warning")
+        ) {
+          await keepsService.deleteKeep(id)
+        }
+      },
+
+      checkVault() {
+        if (AppState.activeVault.creatorId == AppState.account.id) {
+          return true
+        }
       }
+
+
+
+
+
+
+
     }
   }
 }
+
 </script>
 
 
