@@ -6,7 +6,8 @@
       <img class="creator-img" :src="keep.creator.picture" alt="">
     </div> -->
 
-    <div class="keep-container h-20 w-20" data-bs-target="#keepModal" data-bs-toggle="modal" @click="setActiveKeep()">
+    <div class="keep-container h-20 w-20 text-light" data-bs-target="#keepModal" data-bs-toggle="modal"
+      @click="setActiveKeep()">
       <img :src="keep.img" alt="" class="img-fluid keep-img">
       <div class="d-flex justify-content-between img-text mx-2">
         <h3 class="mx-2">{{ keep.name }}</h3>
@@ -62,7 +63,7 @@ export default {
   // top: 0;
   // right: auto;
   font-weight: bold;
-  text-shadow: 1px 1px rgba(126, 125, 125, 0.313);
+  text-shadow: 1px 1px rgba(37, 37, 37, 0.656);
 }
 
 .keep-img {

@@ -17,7 +17,7 @@
         <h3 class="mt-4">Vaults<span class="text-primary"><i class="mdi mdi-plus"></i></span></h3>
       </div>
       <div class="col-6 col-md-3" v-for="v in vaults" :key="v.id">
-        <div :style="`background-image: url(${v.img});`" class="vault-container m-0 p-2 position-relative"
+        <div :style="`background-image: url(${v.img});`" class="text-light vault-container m-0 p-2 position-relative"
           @click="navToVaultPage(v.id)">
           <div class="d-flex align-items-end position-absolute top-0 bottom-0">
             <h3>{{ v.name }}</h3>
@@ -102,8 +102,7 @@ export default {
 }
 
 .vault-container h3 {
-  text-shadow: 1px 1px rgba(119, 119, 119, 0.307);
-  background-color: rgba(119, 119, 119, 0.307);
+  text-shadow: 1px 1px rgba(57, 56, 56, 0.868);
 }
 
 .masonry-frame {

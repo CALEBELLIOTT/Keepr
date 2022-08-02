@@ -4,7 +4,7 @@
   <div class="component">
     <div class="btn-group dropstart">
       <button type="button" class="btn btn-primary dropdown-toggle modal-btn" data-bs-toggle="dropdown"
-        aria-expanded="false">
+        aria-expanded="false" aria-label="create vault and keep button">
         <h1 class="m-0"><i class="mdi mdi-plus p-0 m-0"></i></h1>
       </button>
       <ul class="dropdown-menu">

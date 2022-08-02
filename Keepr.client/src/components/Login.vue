@@ -6,7 +6,8 @@
     </button>
 
     <div class="dropdown my-2 my-lg-0" v-else>
-      <div class="dropdown-toggle selectable" data-bs-toggle="dropdown" aria-expanded="false" id="authDropdown">
+      <div class="dropdown-toggle selectable" data-bs-toggle="dropdown" role="directory" aria-expanded="false"
+        id="authDropdown">
         <div v-if="account.picture">
           <img :src="account.picture" alt="account photo" height="40" class="rounded" />
           <span class="mx-3 text-success lighten-30">{{ account.name }}</span>

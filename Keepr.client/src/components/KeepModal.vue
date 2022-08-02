@@ -89,7 +89,6 @@ export default {
       },
       goToProfilePage(id) {
         router.push({ name: "Profile", params: { id } })
-        console.log(route.name);
       },
       async deleteVaultKeep(id) {
         if (await Pop.confirm("are you sure you want to remove this keep?")) {
