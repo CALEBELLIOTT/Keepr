@@ -1,3 +1,4 @@
+import { useRoute } from "vue-router";
 import { AppState } from "../AppState";
 import { router } from "../router";
 import Pop from "../utils/Pop";
@@ -15,11 +16,12 @@ class KeepsService {
   }
 
 
-  async createKeep(data) {
+  async createKeep(data, route) {
     try {
       const res = await api.post("api/keeps", data)
       AppState.keeps.push(res.data)
       AppState.userKeeps.push(res.data)
+      // AppState.profileKeeps.push(res.data)
     } catch (error) {
       console.error(error)
       Pop.toast(error.message)
@@ -52,6 +54,7 @@ class KeepsService {
       AppState.keeps = AppState.keeps.filter(k => k.id != id)
       AppState.profileKeeps = AppState.profileKeeps.filter(k => k.id != id)
       AppState.userKeeps = AppState.userKeeps.filter(k => k.id != id)
+      Pop.toast("keep deleted!", "success")
     } catch (error) {
       console.error(error)
       Pop.toast(error.message, "error")
