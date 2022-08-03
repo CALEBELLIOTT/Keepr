@@ -54,6 +54,7 @@ class KeepsService {
       AppState.keeps = AppState.keeps.filter(k => k.id != id)
       AppState.profileKeeps = AppState.profileKeeps.filter(k => k.id != id)
       AppState.userKeeps = AppState.userKeeps.filter(k => k.id != id)
+      AppState.activeVaultKeeps = AppState.activeVaultKeeps.filter(k => id != k.id)
       Pop.toast("keep deleted!", "success")
     } catch (error) {
       console.error(error)
