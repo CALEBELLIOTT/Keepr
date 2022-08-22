@@ -1,4 +1,4 @@
--- Active: 1658254601060@@SG-CalebDev-6476-mysql-master.servers.mongodirector.com@3306
+-- Active: 1661189072190@@SG-num2-6591-mysql-master.servers.mongodirector.com@3306
 
 CREATE TABLE
     IF NOT EXISTS accounts(
