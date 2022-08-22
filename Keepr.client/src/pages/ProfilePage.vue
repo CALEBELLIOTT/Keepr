@@ -14,7 +14,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <h3 class="mt-4">Vaults<span class="text-primary"><i class="mdi mdi-plus"></i></span></h3>
+        <h3 class="mt-4">Vaults</h3>
       </div>
       <div class="vault-row d-flex p-2">
         <div class="mx-2" v-for="v in vaults" :key="v.id">
@@ -30,7 +30,7 @@
     <div class="row">
       <div class="col-12">
         <div class="mt-4">
-          <h3>Keeps<span class="text-primary"><i class="mdi mdi-plus"></i></span></h3>
+          <h3>Keeps</h3>
         </div>
       </div>
       <div class="masonry-frame">
